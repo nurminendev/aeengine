@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+#  cl - Count lines of code in AE Engine
+#
+#  Copyright (C) 2003 Riku "Rakkis" Nurminen
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+# AE Engine code
+LINES_CPP=`cat ../src/libs/*/*.cpp ../src/libs/*/*/*.cpp ../src/plugins/*/*.cpp | wc -l | cut --bytes=4-`
+LINES_H=`cat ../include/*.h ../include/*/*.h | wc -l | cut --bytes=4-`
+LINES_MAKEFILE=`cat ../Makefile.in ../*/Makefile.in ../*/*/Makefile.in ../*/*/*/Makefile.in | wc -l | cut --bytes=4-`
+LINES_SCRIPT=`cat ../configure.ac ../acinclude.m4 ../*.sh | wc -l | cut --bytes=4-`
+LINES_TOTAL=`expr $LINES_CPP + $LINES_H + $LINES_MAKEFILE + $LINES_SCRIPT`
+
+# Apps code (apps/*)
+APP_LINES_CPP=`cat ../apps/*/*.cpp | wc -l | cut --bytes=4-`
+APP_LINES_H=`cat ../apps/*/*.h | wc -l | cut --bytes=4-`
+APP_LINES_TOTAL=`expr $APP_LINES_CPP + $APP_LINES_H`
+
+GRAND_TOTAL=`expr $LINES_TOTAL + $APP_LINES_TOTAL`
+
+echo "AE Engine    : $LINES_CPP lines in .cpp, $LINES_H lines in .h, $LINES_SCRIPT lines in scripts and $LINES_MAKEFILE lines in Makefiles - totalling $LINES_TOTAL lines."
+echo "Apps (apps/*): $APP_LINES_CPP lines in .cpp, $APP_LINES_H lines in .h - totalling $APP_LINES_TOTAL lines."
+echo ""
+echo "Grand total: $GRAND_TOTAL lines."
+echo ""

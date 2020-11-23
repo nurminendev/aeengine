@@ -1,0 +1,57 @@
+#
+#  AE Engine
+#
+#  Copyright (C) 2003 Riku "Rakkis" Nurminen
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+# Tools
+RM		=	rm -f
+@SET_MAKE@
+
+all:	aemdlldr aeterrman aetxtldr
+
+aemdlldr:	aemdlldr_echo
+	(cd aemdlldr && $(MAKE))
+aemdlldr_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine Model Loader Plugin     *'
+	@echo '**************************************************'
+
+aeterrman:	aeterrman_echo $(PLUGIN_TERRMAN_OBJS)
+	(cd aeterrman && $(MAKE))
+aeterrman_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine TerrMan Plugin          *'
+	@echo '**************************************************'
+
+aetxtldr:	aetxtldr_echo $(PLUGIN_TEXTURELOADER_OBJS)
+	(cd aetxtldr && $(MAKE))
+aetxtldr_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine Texture Loader Plugin   *'
+	@echo '**************************************************'
+
+clean:
+	(cd aemdlldr && $(MAKE) clean)
+	(cd aeterrman && $(MAKE) clean)
+	(cd aetxtldr && $(MAKE) clean)
+
+allclean:
+	(cd aemdlldr && $(MAKE) allclean)
+	(cd aeterrman && $(MAKE) allclean)
+	(cd aetxtldr && $(MAKE) allclean)
+	$(RM) Makefile

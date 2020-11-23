@@ -1,0 +1,212 @@
+2003-03-02  Riku Nurminen
+
+	* *************** *
+	*** 0.1 RELEASE ***
+	* *************** *
+
+	* Changed the PACKAGE_TARNAME in configure.ac to 'aeengine' and tweaked 'make dist' a bit more.
+
+	* Added -rdynamic to the LDFLAGS in ae-config. This seemed to break a lot of things (?).
+
+	* Fixed a memleak in the registry that happened when a plugin could not be loaded and the app
+	bailed out.
+
+2003-03-01  Riku Nurminen
+
+	* Removed the AC_HEADER_STD C-standard library check from configure.ac as those libraries are
+	not used by AE.
+
+	* Added materialpool to the registry. The materials created by user were never deleted before.
+	Fixed. Thanks go to the new memory manager for revealing this leak.
+
+2003-02-28  Riku Nurminen
+
+	* Added to most of the classes the AECF_CDNEF and AECF_CNAME macros which are used my the
+	memory manager.
+
+	* The new operator never got overwritten so that the memory manager would be used. Fixed that.
+	Thanks swente for pointing it out. Woops :)
+
+	* Removed aeCTimer and made new aeTimer.
+
+	* Removed the global self_ptr from aeEngine and added another to aeRegistry. This is better
+	because now we have global access to all the subsystems instead of only the engine.
+
+	* Removed the unnecessary opengl and sdl cflags from the memory manager compilation.
+
+	* Moved aeUtil::ASSERT to aeBase and modified it to use the new logger for output. Changed all
+	the source files that call ASSERT aswell.
+
+	* Changed most of the old aeUtil::Report() calls to use the new logger.
+
+	* Added new aeBase base class. This class includes the new logging functionality (thanks again
+	swente!) and each class that wants to use the logger should derive from this class.
+
+2003-02-27  Riku Nurminen
+
+	* Changed the order of ldflags so that -laereg is before -laeengine as otherwise it broke some
+	things.
+
+	* Added AE_APPLICATION macro that *must* be included at global scope, in the file that contains
+	main() in an AE application. This macro instantiates the memory manager and will probably take
+	care of other stuff also in the future.
+
+	* aedefs.h must now be included in *EVERY* source file (be it an application using the AE api
+	or an engine-inside whatever). If you don't need the video stuff includes you can
+	#define ONLY_INCLUDE_STD before #include <aedefs.h>.
+
+	* Added a new memory manager library contributed by swente <ssuebert@web.de>, thanks! This
+	should sufficiently ease the tracking of mem leaks.
+
+	* Added few missing \n's.
+
+2003-02-26  Riku Nurminen
+
+	* Updated API docs (also switched them to .php for future use of php header). Updated the web
+	docs too.
+
+	* aeMD2Object and aeModelLoader now use a aeVector3 and aeTexCoord2 vector containers to store
+	vertices & texcoords. This also makes the model loader now compatible with the (broken :)
+	frustum culler.
+
+	* Changed the vertex list, vertex color list, and vertex texcoord list vectors in aeObject
+	to contain pointers instead of non-pointers. The vectors themselves are also now pointers. This
+	makes it easier for the aeObject to be compatible with the model loader. I don't see anything
+	bad this could cause (as long as those pointers are carefully taken care of).
+
+	* Separated the types from aedefs.h into new file include/aetypes.h.
+
+2003-02-24  Riku Nurminen
+
+	* Added Set() and Unit() to aeVector and aeVector3 and added aeVector4 with the previous
+	changes included.
+
+	* Added some missing operators to the vector classes and inlined the operators aswell.
+
+	* Added new class aeTexCoord2.
+
+	* Added aeObject::IsTransparent() and aeObject::GetMaterial().
+
+	* Added aeModel::IsAnimating().
+
+	* Removed much useless stuff from aeModel and aeMD2Object (stuff that is already implemented
+	in aeObject).
+
+	* Moved include/aegeom/md2object.h to include/aemdlldr/md2object.h and
+	src/libs/aegeom/md2object.cpp to src/plugins/aemdlldr/md2object.cpp. We only want to compile
+	it if the plugin is wanted (otherwise it would be useless). This won't of course make much
+	difference until disabling of plugins is implemented (it will be soon! or when I get to it :)).
+
+	* Changed the names of the following API functions:
+	 - aeEngine::NumObjects() to aeEngine::GetObjectCount()
+	 - aeEngine::NumTextures() to aeEngine::GetTextureCount()
+	 - aeObject::NumVertices() to aeObject::GetVertexCount()
+	 - aeMaterial::GetTexCount() to aeMaterial::GetTextureCount()
+
+	* scripts/cl: Now counts makefiles too. And the apps under apps/*.
+
+	* Moved include/aeengine/glproc.h to include/aeengine/win32/glproc.h and
+	src/libs/aeengine/glproc.cpp to src/libs/aeengine/win32/glproc.cpp. We only take those in if
+	we are on win32.
+
+	* Added own Makefiles for each of the engine libraries and plugins.
+
+	* Added SphereInFrustum() and CubeInFrustum() to aeFrustumCuller and modified the engine
+	visibility testing to use those.
+
+	* Added GetBoundingSphereRadius() to aeObject. This is used by the frustum culler.
+
+2003-02-22  Riku Nurminen
+
+	* Added pluginpool to the registry so that the plugins' destructors can and actually get
+	called too. Also the objects' destructors were never called.. woops. Fixed that too.
+
+	* Changed some lurking malloc/free calls to new/delete.
+
+	* Moved all the common stuff from the object classes into aeObject. This makes it easier to
+	add things to the objects as you don't have to add the same stuff into 5 different places.
+
+2003-02-21  Riku Nurminen
+
+	* Added -fomit-frame-pointer to CFLAGS in optimize build mode.
+
+2003-02-20  Riku Nurminen
+
+	* Fixed a silly bug in the BMP loader.
+
+	* Added NumVertices() and GetVertex() to the geometry classes (aeLine, aePolygon, ...).
+
+	* Added simple frustum culling. This is still a lot work to be done.
+
+2003-02-10  Riku Nurminen
+
+	* ***************** *
+	*** 0.0.5 RELEASE ***
+	* ***************** *
+
+2003-02-08  Riku Nurminen
+
+	* 'make dist' now produces tar.gz, tar.bz2 and md5sum into the dist/ directory.
+
+2003-02-05    <Rakkis@KIWI>
+
+	* Lots of win32 fixes. Added msvc6 project files (compiles now, but aetest segfaults).
+
+2003-02-05  Riku Nurminen
+
+	* Reorganized aetest a bit.
+
+	* Removed some unnecessary textures from data/ and added RLE compressed smile.tga.
+
+	* Fixed the texture loader so it no longer produces strange graphical artifacts to
+	TGA textures.
+
+2003-02-03  Riku Nurminen
+
+	* The plugin entry symbols now return aePlugin* instead of void*, as they should.
+
+	* Changed the plugin entry symbol from CREATE_PLUGIN to PLUGIN_ENTRY.
+
+	* Added check for dlfcn.h in configure.ac and modified registry.cpp accordingly.
+
+2003-02-02  Riku Nurminen
+
+	* Removed GL/glx.h from aedefs.h as it's not needed at all.
+
+	* aeTriangle, aeQuad, aePolygon, aeMD2Object win32 & glProc tunings
+
+	* Added glProc for windows to store pointers to some gl functions.
+
+	* Finally removed the public engine pointer from aeCamera. There's now globally
+	accessible aeEngine::self_ptr that the camera uses (thanks swente).
+
+	* Added check for AEROOT in configure.
+
+	* Added own Makefile.in for apps/aetest.
+
+	* Added autogen.sh.
+
+	* Added check for SDL in configure.ac and modified the makefiles accordingly.
+
+	* Added ae-config script to help produce compiling options for apps. Changed the aetest
+	app to use the script.
+
+	* Added MDL_CHECK_OPENGL to configure.ac and modified the makefiles to use the check results.
+
+	* The makefiles now use the EXEEXT and OBJEXT variables from autoconf.
+
+2003-02-02    <Rakkis@KIWI>
+
+	* Added include/glext.h and did various win32 cleanups and fixes. Doesn't compile in windows
+	at the moment but will soon...
+
+2003-02-01  Riku Nurminen
+
+	* Fixed the multitexturing functionality in aeLine, aeQuad, aeTriangle and aePolygon.
+
+	* src/libs/aesys/system.cpp: Added SetWindowCaption() to change the
+	window icon name and caption.
+
+2003-01-25  Riku Nurminen
+
+	* ae: initial version.

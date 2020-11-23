@@ -1,0 +1,78 @@
+#
+#  AE Engine
+#
+#  Copyright (C) 2003 Riku "Rakkis" Nurminen
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+TARNAME = @PACKAGE_TARNAME@
+VERSION = @PACKAGE_VERSION@
+
+# Tools
+RM	=	rm -f
+@SET_MAKE@
+
+all:	aelibs	aeplugins ae-config aeapps
+
+aelibs:
+	(cd src/libs && $(MAKE))
+
+aeplugins:
+	(cd src/plugins && $(MAKE))
+
+# This is a temporary hack :)
+ae-config: ae-config_echo
+	@echo 'Generating ae-config...'
+	@echo -e "#!/bin/sh\n#\n# AE Engine config script\n# Outputs compiler flags for compiling AE programs\n#\n# Copyright (C) 2003 Riku \"Rakkis\" Nurminen\n#\n# Code stolen from cs-config\n#\n\nCFLAGS=\"@CFLAGS@ -I\$${AEROOT}/include\"\nLDFLAGS=\"-rdynamic @LIBS@ -L\$${AEROOT}/out @AELIBS@\"\n\nwhile test \$$# -gt 0; do\n  case \$$1 in\n\t--cflags)\n\t\tshow_cflags=true;\n\t;;\n\t--libs)\n\t\tshow_libs=true;\n\t;;\n\t*)\n  esac\n  shift\ndone\n\nif test -n \"\$$show_cflags\"; then\n\techo \"\$${CFLAGS}\"\nfi\nif test -n \"\$$show_libs\"; then\n\techo \"\$${LDFLAGS}\"\nfi\n\nexit 0" > ae-config
+	@chmod +x ./ae-config
+	@echo 'done.'
+ae-config_echo:
+	@echo '**************************************************'
+	@echo '* Generating the ae-config script...             *'
+	@echo '**************************************************'
+
+aeapps:	aelibs
+	(cd apps && $(MAKE))
+
+clean:
+	(cd apps && $(MAKE) clean)
+	(cd src/libs && $(MAKE) clean)
+	(cd src/plugins && $(MAKE) clean)
+	$(RM) out/*.a
+	$(RM) *.so
+	$(RM) *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
+	$(RM) -r config.log config.status autom4te.cache
+	$(RM) ae-config
+
+allclean:
+	(cd apps && $(MAKE) allclean)
+	(cd src/libs && $(MAKE) allclean)
+	(cd src/plugins && $(MAKE) allclean)
+	$(RM) out/*.a
+	$(RM) *.so
+	$(RM) *~ */*~ */*/*~ */*/*/*~ */*/*/*/*~
+	$(RM) -r config.log config.status autom4te.cache/
+	$(RM) aclocal.m4
+	$(RM) ae-config
+	$(RM) include/config.h
+	$(RM) Makefile
+	$(RM) -r dist/
+
+dist: allclean
+	(cd ../ && mv ae $(TARNAME)-$(VERSION) && tar --exclude CVS --exclude manual --exclude TODO -cvvf $(TARNAME)-$(VERSION).tar $(TARNAME)-$(VERSION) && gzip -c $(TARNAME)-$(VERSION).tar > $(TARNAME)-$(VERSION).tar.gz && bzip2 -c $(TARNAME)-$(VERSION).tar > $(TARNAME)-$(VERSION).tar.bz2 && rm -f $(TARNAME)-$(VERSION).tar && md5sum $(TARNAME)-$(VERSION).tar.gz $(TARNAME)-$(VERSION).tar.bz2 > $(TARNAME)-$(VERSION).md5sum && mv $(TARNAME)-$(VERSION) ae && mkdir ae/dist && mv $(TARNAME)-$(VERSION).tar.gz $(TARNAME)-$(VERSION).tar.bz2 $(TARNAME)-$(VERSION).md5sum ae/dist/)
+	@echo '**********************************************************'
+	@echo ' $(TARNAME)-$(VERSION) is ready for distribution!'
+	@echo '**********************************************************'

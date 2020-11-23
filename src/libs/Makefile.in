@@ -1,0 +1,93 @@
+#
+#  AE Engine
+#
+#  Copyright (C) 2003 Riku "Rakkis" Nurminen
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+# Tools
+RM		=	rm -f
+@SET_MAKE@
+
+all:	aeengine aegeom aegfx aemm aereg aesys aeutil
+
+aeengine:	aeengine_echo
+	(cd aeengine && $(MAKE))
+aeengine_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine 3D Engine library       *'
+	@echo '**************************************************'
+
+aegeom:	aegeom_echo
+	(cd aegeom && $(MAKE))
+aegeom_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine Geometry library        *'
+	@echo '**************************************************'
+
+aegfx:	aegfx_echo
+	(cd aegfx && $(MAKE))
+aegfx_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine GFX library             *'
+	@echo '**************************************************'
+
+aemm:	aemm_echo
+	(cd aemm && $(MAKE))
+aemm_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine Memory Manager          *'
+	@echo '**************************************************'
+
+aereg:	aereg_echo
+	(cd aereg && $(MAKE))
+aereg_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine Registry library        *'
+	@echo '**************************************************'
+
+aesys:	aesys_echo
+	(cd aesys && $(MAKE))
+aesys_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine System library          *'
+	@echo '**************************************************'
+
+aeutil:	aeutil_echo $(LIBUTIL_OBJS)
+	(cd aeutil && $(MAKE))
+aeutil_echo:
+	@echo '**************************************************'
+	@echo '* Building the AE Engine Utility library         *'
+	@echo '**************************************************'
+
+clean:
+	(cd aeengine && $(MAKE) clean)
+	(cd aegeom && $(MAKE) clean)
+	(cd aegfx && $(MAKE) clean)
+	(cd aemm && $(MAKE) clean)
+	(cd aereg && $(MAKE) clean)
+	(cd aesys && $(MAKE) clean)
+	(cd aeutil && $(MAKE) clean)
+
+allclean:
+	(cd aeengine && $(MAKE) allclean)
+	(cd aegeom && $(MAKE) allclean)
+	(cd aegfx && $(MAKE) allclean)
+	(cd aemm && $(MAKE) allclean)
+	(cd aereg && $(MAKE) allclean)
+	(cd aesys && $(MAKE) allclean)
+	(cd aeutil && $(MAKE) allclean)
+	$(RM) Makefile

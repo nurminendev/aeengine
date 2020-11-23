@@ -1,0 +1,254 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "aeengine"=.\aeengine\aeengine.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "aegeom"=.\aegeom\aegeom.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "aegfx"=.\aegfx\aegfx.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "aereg"=.\aereg\aereg.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "aesys"=.\aesys\aesys.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "aeutil"=.\aeutil\aeutil.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "appaetest"=.\appaetest\appaetest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name aeengine
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegeom
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegfx
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aereg
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aesys
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeutil
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name plgaemdlldr
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name plgaeterrman
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name plgaetxtldr
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "grpaeall"=.\grpaeall\grpaeall.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name aeengine
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegeom
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegfx
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aereg
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aesys
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeutil
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name plgaemdlldr
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name plgaeterrman
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name plgaetxtldr
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name appaetest
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "plgaemdlldr"=.\plgaemdlldr\plgaemdlldr.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name aegeom
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aereg
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeengine
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aesys
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegfx
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeutil
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "plgaeterrman"=.\plgaeterrman\plgaeterrman.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name aegeom
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeutil
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeengine
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegfx
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "plgaetxtldr"=.\plgaetxtldr\plgaetxtldr.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name aegfx
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aereg
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeengine
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aesys
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aeutil
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name aegeom
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

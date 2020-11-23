@@ -1,0 +1,16 @@
+
+Compiling and installing AE Engine
+==================================
+
+Compiling AE Engine is simple:
+
+Step 1:
+
+	"./configure"
+
+Step 2:
+
+	"make"
+
+To test that everything's working, run the "aetest" application found in
+the AE source tree after compilation.
