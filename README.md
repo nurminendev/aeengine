@@ -4,7 +4,7 @@
 
 # AE Engine
 
-https://aeengine.sourceforge.net/
+http://aeengine.sourceforge.net/
 
 AE Engine is a free 3D Engine. It uses OpenGL for graphics 
 rendering and SDL to interface with the operating system.
